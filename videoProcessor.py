@@ -9,9 +9,8 @@ import cv2
 def readVideo(path):
     vidcap = cv2.VideoCapture(path)
     folder = (os.path.splitext(path)[0]) + "IMAGEFILES"  
-    os.mkdir(folder)
+    os.mkdir(folder) #creates a folder with mostly same name
     count = 0.0
-    #while True:
     while True:
         success,image = vidcap.read()
         if not success:
@@ -22,7 +21,11 @@ def readVideo(path):
     count *=2 #there are count*2 images in the folder
     print("{} images are extacted in {}.".format(count,folder))
 
-#driver code, runs through all the files available in working directory
+'''
+    DRIVER CODE
+    runs through all the files in working directory
+    creates a corresponding folder for each video found
+'''
 files = [f for f in os.listdir('.') if os.path.isfile(f)]
 for f in files:
     breaks = f.split('.')
