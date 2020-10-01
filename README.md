@@ -1,8 +1,6 @@
 # Traffic Light Processing Model
 
-For: Brooklyness's Chasson Helmet, for scooter and bike riders.
-
-Goal: Build Deep Learning model to recognize whether or not customers are obeying traffic lights
+Goal: Build Neural Network model to recognize whether people are obeying traffic lights
 
 Input: Video from the front-facing camera
 
