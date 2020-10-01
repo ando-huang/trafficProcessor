@@ -18,7 +18,6 @@ def readVideo(path):
         cv2.imwrite(os.path.join(folder,"frame{:.1f}.jpg".format(count)), image)     # save frame as JPEG file
         #count is the increment between each screencap
         count += 1
-    count *=2 #there are count*2 images in the folder
     print("{} images are extacted in {}.".format(count,folder))
 
 '''
