@@ -14,6 +14,7 @@ from tensorflow.keras.models import Sequential
 data_url = 'https://hci.iwr.uni-heidelberg.de/system/files/private/datasets/1681105773/dataset_test_riib.zip.001'
 #god i hate underscores
 
+
 #now do something with the data_path to extract the images
 
 batch_size = 32
