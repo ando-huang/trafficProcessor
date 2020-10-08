@@ -1,16 +1,19 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-import PIL
+#import PIL for opening images
 import tensorflow as tf
 
-from tensoflow import keras
+from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
 
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+
 import pathlib
-dataset_url = 'https://hci.iwr.uni-heidelberg.de/system/files/private/datasets/1681105773/dataset_test_riib.zip.001'
-data_dir = tf.keras.utils.get_file('flower_photos', origin=dataset_url, untar=True)
+dataset_url = 'https://hci.iwr.uni-heidelberg.de/system/files/private/datasets/1944557291/dataset_test_riib.zip.002'
+data_dir = tf.keras.utils.get_file('traffic_photos.zip', origin=dataset_url, untar=True, extract = True)
 data_dir = pathlib.Path(data_dir)
 
 batch_size = 32
