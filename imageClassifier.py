@@ -8,15 +8,21 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
 
-import pathlib
+'''import pathlib
 dataset_url = 'https://www.kaggle.com/mbornoe/lisa-traffic-light-dataset/download'
 data_dir = tf.keras.utils.get_file('traffic_photos.zip', origin=dataset_url, untar=True, extract = True)
 data_dir = pathlib.Path(data_dir)
+'''
+
+#Uploads from Local, might have to reogranize and classify the data.
+data_dir = os.listdir("archive/daySequence1")
 
 batch_size = 32
 img_height = 640
 img_width = 960
 
+
+#Fix these two training data sets, currently the function fails
 train_ds = tf.keras.preprocessing.image_dataset_from_directory(
     data_dir,
     validation_split=0.2,
