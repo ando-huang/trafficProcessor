@@ -8,11 +8,8 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
 
-import ssl
-ssl._create_default_https_context = ssl._create_unverified_context
-
 import pathlib
-dataset_url = 'https://hci.iwr.uni-heidelberg.de/system/files/private/datasets/1944557291/dataset_test_riib.zip.002'
+dataset_url = 'https://www.kaggle.com/mbornoe/lisa-traffic-light-dataset/download'
 data_dir = tf.keras.utils.get_file('traffic_photos.zip', origin=dataset_url, untar=True, extract = True)
 data_dir = pathlib.Path(data_dir)
 
@@ -48,16 +45,16 @@ normalization_layer = layers.experimental.preprocessing.Rescaling(1./255)
 num_classes = 4
 
 model = Sequential([
-  layers.experimental.preprocessing.Rescaling(1./255, input_shape=(img_height, img_width, 3)),
-  layers.Conv2D(16, 3, padding='same', activation='relu'),
-  layers.MaxPooling2D(),
-  layers.Conv2D(32, 3, padding='same', activation='relu'),
-  layers.MaxPooling2D(),
-  layers.Conv2D(64, 3, padding='same', activation='relu'),
-  layers.MaxPooling2D(),
-  layers.Flatten(),
-  layers.Dense(128, activation='relu'),
-  layers.Dense(num_classes)
+    layers.experimental.preprocessing.Rescaling(1./255, input_shape=(img_height, img_width, 3)),
+    layers.Conv2D(16, 3, padding='same', activation='relu'),
+    layers.MaxPooling2D(),
+    layers.Conv2D(32, 3, padding='same', activation='relu'),
+    layers.MaxPooling2D(),
+    layers.Conv2D(64, 3, padding='same', activation='relu'),
+    layers.MaxPooling2D(),
+    layers.Flatten(),
+    layers.Dense(128, activation='relu'),  
+    layers.Dense(num_classes)
 ])
 
 model.compile(optimizer='adam',
