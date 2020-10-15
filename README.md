@@ -7,7 +7,7 @@ Input: Video from the front-facing camera
 Output: Rating from 0 - 100 on how well the customer obeys traffic lights in a particular video
 
 Trained on: 
-https://hci.iwr.uni-heidelberg.de/node/6132/download/635332d553013d5afadcaef7db3b50a4
+dataset from kaggle, **will link later**
 
 How it works (Conceptual):
   Takes snapshots at intervals of 1s throughout the video, and changes interval based on image class
@@ -16,8 +16,11 @@ How it works (Conceptual):
   Uses class information in a series in order to determine a score for each instance of a traffic light
   Provides average of traffic scores as a result to each video given
 
+non-ML files:
+dataSorter.py - reorganizes the file structure of the training data to be more like a sample t-set
+videoProcessor.py - takes snapshots of the video we want to check, and then stores them in a folder
 
-# Set up Environment
+# Set up Environment if using venv
 
 '''
 1. activate venv 
