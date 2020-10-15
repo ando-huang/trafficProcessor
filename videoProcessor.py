@@ -1,3 +1,7 @@
+'''
+    @author Andrew Huang
+'''
+
 import os
 import cv2
 
