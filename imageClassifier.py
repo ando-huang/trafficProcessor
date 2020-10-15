@@ -3,6 +3,7 @@ import numpy as np
 import os
 #import PIL for opening images
 import tensorflow as tf
+import pandas as pd
 
 from tensorflow import keras
 from tensorflow.keras import layers
@@ -15,7 +16,8 @@ data_dir = pathlib.Path(data_dir)
 '''
 
 #Uploads from Local, might have to reogranize and classify the data.
-data_dir = os.listdir("archive/daySequence1")
+data_dir = os.listdir("archive/daySequence1/")
+df = pd.read_csv("frameAnnotationsBULB.csv", sep=";", usecols = ['Filename', 'Annotation tag'])
 
 batch_size = 32
 img_height = 640
@@ -85,7 +87,7 @@ epochs_range = range(epochs)
 
 plt.figure(figsize=(8, 8))
 plt.subplot(1, 2, 1)
-plt.plot(epochs_range, acc, label='Training Accuracy')
+plt.plot(epochs_range, val_acc, label='Training Accuracy')
 plt.plot(epochs_range, val_acc, label='Validation Accuracy')
 plt.legend(loc='lower right')
 plt.title('Training and Validation Accuracy')
