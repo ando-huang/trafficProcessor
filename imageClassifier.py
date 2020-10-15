@@ -3,7 +3,7 @@ import numpy as np
 import os
 #import PIL for opening images
 import tensorflow as tf
-import pandas as pd
+import pandas as pd #this needs to work, to read the csv and get tags for each image
 
 from tensorflow import keras
 from tensorflow.keras import layers
@@ -16,12 +16,20 @@ data_dir = pathlib.Path(data_dir)
 '''
 
 #Uploads from Local, might have to reogranize and classify the data.
-data_dir = os.listdir("archive/daySequence1/")
-df = pd.read_csv("frameAnnotationsBULB.csv", sep=";", usecols = ['Filename', 'Annotation tag'])
+#data_dir should be a directory of the folders with each classification
+data_dir = os.listdir("archive/daySequence1/daySequence1/frames/")
+#use this to get the corresponding filenames and the "stop" "go" tags for each file
+df = pd.read_csv("archive/Annotations/Annotations/daySequence1/frameAnnotationsBULB.csv", sep=";", usecols = ['Filename', 'Annotation tag']) 
 
 batch_size = 32
-img_height = 640
+
+#image params for the camera feed
+img_height = 640 
 img_width = 960
+
+#image params for the training set
+test_height = 960
+test_width = 1280
 
 
 #Fix these two training data sets, currently the function fails
@@ -41,7 +49,8 @@ val_ds = tf.keras.preprocessing.image_dataset_from_directory(
     image_size=(img_height, img_width),
     batch_size=batch_size)
 
-class_names = train_ds.class_names
+#all 4 of the annotation tags from the csv
+class_names = df.class_names
 
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 
@@ -50,7 +59,7 @@ val_ds = val_ds.cache().prefetch(buffer_size=AUTOTUNE)
 
 normalization_layer = layers.experimental.preprocessing.Rescaling(1./255)
 
-num_classes = 4
+num_classes = 2
 
 model = Sequential([
     layers.experimental.preprocessing.Rescaling(1./255, input_shape=(img_height, img_width, 3)),

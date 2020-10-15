@@ -1,30 +1,44 @@
+'''
+    dataSorter is intended to prepare the data in archive/ for imageClassifier.py
+    the problem with the given data is that it isn't sorted
+    this should place images in folders with corresponding classnames that would help the model
+'''
+
 import os
 import shutil
 import pandas as pd
+print(pd.__version__)
 
-df = pd.read_csv("archive/Annotations/Annotations/daySequence1/frameAnnotationsBULB.csv", sep=";", usecols = ['Filename', 'Annotation tag'])
+df = pd.read_csv(
+    "archive/Annotations/Annotations/daySequence1/frameAnnotationsBULB.csv",
+    sep=";",
+    usecols = ['Filename', 'Annotation tag']
+    )
 os.chdir("archive/daySequence1/daySequence1/frames/")
-os.mkdir("stop")
-os.mkdir("go")
-os.mkdir("warning")
-#now based on the df file, sort all the images into the right folders
+#print(os.listdir())
+files = os.listdir()
+#only create the new folders if they dont exist already
+if 'stop' not in files:
+    os.mkdir("stop")
+if 'go' not in files:
+    os.mkdir("go")
+if 'warning' not in files:
+    os.mkdir("warning")
+    
+# i is index, j is series of data about the file at that index
 for i, j in df.iterrows():
-    #i is the index of the iterrows, j is a series
-    # now just sort the corresponding image from /frames/ to the right directory
-    if j[1] == 'stop':
-        #print('stop')
-        print(j[0] + j[1])
+    # sort each image into the right folder based on the csv
+    #print(j[0].split("/")[1])
+    if j[1] == 'stop': #first case
         imgPath = j[0].split("/")[1] #should get the actual filename within the frames folder
-        shutil.move(imgPath, "stop/" + imgPath)
-        os.remove(imgPath)
+        #move(source, dest)
+        shutil.copy(imgPath, "stop")
+        #os.remove(imgPath)
     elif j[1] == 'go':
-        #print(j[0] + "go")
         imgPath = j[0].split("/")[1] #should get the actual filename within the frames folder
-        shutil.move(imgPath, "go/" + imgPath)
-        os.remove(imgPath)
+        shutil.copy(imgPath, "go")
+        #os.remove(imgPath)
     else:
-        #print('warning')
         imgPath = j[0].split("/")[1] #should get the actual filename within the frames folder
-        shutil.move(imgPath, "go/" + imgPath)
-        os.remove(imgPath)
-
+        shutil.copy(imgPath, "warning")
+        #os.remove(imgPath)
