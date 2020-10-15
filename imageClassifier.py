@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-#import PIL for opening images
+#import PIL for opening images isnt needed, do it for demonstration purposes to check if actually opened
 import tensorflow as tf
 import pandas as pd #this needs to work, to read the csv and get tags for each image
 
@@ -17,21 +17,27 @@ data_dir = pathlib.Path(data_dir)
 
 #Uploads from Local, might have to reogranize and classify the data.
 #data_dir should be a directory of the folders with each classification
-data_dir = os.listdir("archive/daySequence1/daySequence1/frames/")
+os.chdir("archive/daySequence1/daySequence1/")
+#sorted_data folder contains the preprocessed data from data_sorter.py
+data_dir = 'sorted_data'
 #use this to get the corresponding filenames and the "stop" "go" tags for each file
-df = pd.read_csv("archive/Annotations/Annotations/daySequence1/frameAnnotationsBULB.csv", sep=";", usecols = ['Filename', 'Annotation tag']) 
 
 batch_size = 32
+#we might want to unify all the image sizes to the smaller size (640x960)
 
-#image params for the camera feed
+#image params for the data we want to check
 img_height = 640 
 img_width = 960
-
-#image params for the training set
+#image params for the data we are using to train
 test_height = 960
 test_width = 1280
 
 
+#test ds is mostly to figure out exactly what we need to get from this
+test_ds = tf.keras.preprocessing.image_dataset_from_directory(
+    data_dir,
+    labels = "inferred"
+)
 #Fix these two training data sets, currently the function fails
 train_ds = tf.keras.preprocessing.image_dataset_from_directory(
     data_dir,
@@ -49,8 +55,8 @@ val_ds = tf.keras.preprocessing.image_dataset_from_directory(
     image_size=(img_height, img_width),
     batch_size=batch_size)
 
-#all 4 of the annotation tags from the csv
-class_names = df.class_names
+#all 3 of the annotation tags from the csv
+class_names = ['stop', 'go', 'warning']
 
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 
@@ -107,4 +113,3 @@ plt.plot(epochs_range, val_loss, label='Validation Loss')
 plt.legend(loc='upper right')
 plt.title('Training and Validation Loss')
 plt.show()
-
