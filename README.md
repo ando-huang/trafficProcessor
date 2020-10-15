@@ -15,3 +15,14 @@ How it works (Conceptual):
   Determines class of the image using the model
   Uses class information in a series in order to determine a score for each instance of a traffic light
   Provides average of traffic scores as a result to each video given
+
+
+# Set up Environment
+
+'''
+1. activate venv 
+  a. python3 -m venv env
+  b. source env/bin/activate
+  c. pip install {tensorflow, opencv-python}
+
+2. deactivate
