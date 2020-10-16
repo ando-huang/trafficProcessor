@@ -12,7 +12,7 @@ import cv2
 '''
 def readVideo(path):
     vidcap = cv2.VideoCapture(path)
-    folder = (os.path.splitext(path)[0]) + "IMAGEFILES"  
+    folder = (os.path.splitext(path)[0]) + "_IMAGEFILES"  
     os.mkdir(folder) #creates a folder with mostly same name
     count = 0.0
     while True:

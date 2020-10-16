@@ -9,17 +9,9 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
 
-'''import pathlib
-dataset_url = 'https://www.kaggle.com/mbornoe/lisa-traffic-light-dataset/download'
-data_dir = tf.keras.utils.get_file('traffic_photos.zip', origin=dataset_url, untar=True, extract = True)
-data_dir = pathlib.Path(data_dir)
-'''
-
-#Uploads from Local, might have to reogranize and classify the data.
-#data_dir should be a directory of the folders with each classification
 os.chdir("archive/daySequence1/daySequence1/")
 #sorted_data folder contains the preprocessed data from data_sorter.py
-data_dir = 'sorted_data'
+data_dir = 'sorted_data' #is a superfolder of the three classified folders
 #use this to get the corresponding filenames and the "stop" "go" tags for each file
 
 batch_size = 32
@@ -29,15 +21,9 @@ batch_size = 32
 img_height = 640 
 img_width = 960
 #image params for the data we are using to train
-test_height = 960
-test_width = 1280
+#test_height = 960
+#test_width = 1280
 
-
-#test ds is mostly to figure out exactly what we need to get from this
-test_ds = tf.keras.preprocessing.image_dataset_from_directory(
-    data_dir,
-    labels = "inferred"
-)
 #Fix these two training data sets, currently the function fails
 train_ds = tf.keras.preprocessing.image_dataset_from_directory(
     data_dir,
@@ -65,7 +51,7 @@ val_ds = val_ds.cache().prefetch(buffer_size=AUTOTUNE)
 
 normalization_layer = layers.experimental.preprocessing.Rescaling(1./255)
 
-num_classes = 2
+num_classes = 3
 
 model = Sequential([
     layers.experimental.preprocessing.Rescaling(1./255, input_shape=(img_height, img_width, 3)),
