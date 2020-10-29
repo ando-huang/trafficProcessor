@@ -1,12 +1,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-#import PIL for opening images isnt needed, do it for demonstration purposes to check if actually opened
 import tensorflow as tf
 
 from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
+
+#!pip install pyyaml h5py --necessary to save models in HDF5 format
 
 os.chdir("archive/daySequence1/daySequence1/")
 #sorted_data folder contains the preprocessed data from data_sorter.py
@@ -97,3 +98,5 @@ plt.plot(epochs_range, val_loss, label='Validation Loss')
 plt.legend(loc='upper right')
 plt.title('Training and Validation Loss')
 plt.show()
+#at this point the results of the model are available
+
