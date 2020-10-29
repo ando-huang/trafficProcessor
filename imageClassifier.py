@@ -3,7 +3,6 @@ import numpy as np
 import os
 #import PIL for opening images isnt needed, do it for demonstration purposes to check if actually opened
 import tensorflow as tf
-import pandas as pd #this needs to work, to read the csv and get tags for each image
 
 from tensorflow import keras
 from tensorflow.keras import layers
@@ -20,9 +19,6 @@ batch_size = 32
 #image params for the data we want to check
 img_height = 640 
 img_width = 960
-#image params for the data we are using to train
-#test_height = 960
-#test_width = 1280
 
 #Fix these two training data sets, currently the function fails
 train_ds = tf.keras.preprocessing.image_dataset_from_directory(
@@ -42,7 +38,9 @@ val_ds = tf.keras.preprocessing.image_dataset_from_directory(
     batch_size=batch_size)
 
 #all 3 of the annotation tags from the csv
-class_names = ['stop', 'go', 'warning']
+class_names = train_ds.class_names
+print(class_names)
+#class_names = ['stop', 'go', 'warning']
 
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 
@@ -88,7 +86,7 @@ epochs_range = range(epochs)
 
 plt.figure(figsize=(8, 8))
 plt.subplot(1, 2, 1)
-plt.plot(epochs_range, val_acc, label='Training Accuracy')
+plt.plot(epochs_range, val_acc, label='Training Accuracy') 
 plt.plot(epochs_range, val_acc, label='Validation Accuracy')
 plt.legend(loc='lower right')
 plt.title('Training and Validation Accuracy')
