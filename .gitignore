@@ -1,0 +1,12 @@
+#ignore all of these files
+.DS_Store
+	.README.md.un~
+	.idea/
+	.videoProcessor.py.un~
+	.vscode/
+	2020_06_15_1_27_46.MP4
+	2020_06_15_1_27_46IMAGEFILES/
+	TensorFlow_TLA.pem
+	archive/
+	test11.5.png
+	ubuntu@ec2-54-82-242-187.compute-1.amazonaws.com/
