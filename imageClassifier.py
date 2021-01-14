@@ -76,7 +76,7 @@ model.compile(optimizer='adam',
 
 model.summary()
 
-epochs=10
+epochs=50 #increase epochs for higher accuracy, cost of time
 history = model.fit(
   train_ds,
   validation_data=val_ds,
